@@ -1,0 +1,32 @@
+config:
+  ==: ScrollConfig # DO NOT DELETE THIS LINE!
+  scroll-unbound-name: "&bUnbound Teleportation Scroll"
+  scroll-unbound-lore: |-
+    &8---=[ &7Description &7]=---
+    &7An unbound teleportation scroll.
+    &7Right click it to bind it to your location.
+  scroll-bound-name: "&bTeleportation Scroll"
+  scroll-bound-position-lore: |-
+    &8---=[ &7Description &7]=---
+    &7A bound teleportation scroll.
+    &7It goes to &f%x% %y% %z%&7 in &f%world%&7.
+  scroll-bound-location-lore: |-
+    &8---=[ &7Description &7]=---
+    &7A bound teleportation scroll.
+    &7It goes to &f%destination%&7.
+  scroll-unbound-glow: false
+  scroll-bound-glow: true
+  scroll-material: PAPER
+  cooldown: 5000 # Cooldown between usages. Minimum 10.
+  model: 0 # Sets custom model data if the server supports it.
+  charges: 5 # The default number of charges.
+  cost:
+    ==: ScrollCost # DO NOT DELETE THIS LINE!
+    type: POTION # Options: XP, HUNGER, HEALTH. Defaults to XP if invalid.
+    data: # Accepts a number or a potion effect, depending on type. Defaults to 5 if invalid.
+      ==: PotionEffect
+      effect: 9 # Nausea, see https://minecraft.gamepedia.com/Status_effect#Data_values
+      duration: 100 # Duration in ticks.
+      amplifier: 0
+      ambient: false
+      particles: true

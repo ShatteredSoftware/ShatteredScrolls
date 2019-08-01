@@ -1,0 +1,7 @@
+name: ShatteredScrolls
+version: @version@
+main: org.projpi.shatteredscrolls.ShatteredScrolls
+api-version: '1.13'
+authors: [UberPilot]
+description: A plugin that allows for teleportation scrolls.
+website: https://github.com/ShatteredSuite/ShatteredScrolls

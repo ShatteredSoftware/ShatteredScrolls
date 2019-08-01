@@ -1,0 +1,34 @@
+no-permission: "&2ShatteredScrolls &7// &cYou don't have permission to use that."
+reloading: >
+  &2ShatteredScrolls &7// &eReloading. Note that this may result in unintended functionality and additional memory usage.
+  Using the editing commands or restarting is recommended.
+reloaded: >
+  &2ShatteredScrolls &7// &eReloaded.
+invalid-number-format-args: >
+  &2ShatteredScrolls &7// &cInvalid number format. Expected a number, got '&f%input%&c'.
+not-enough-args: >
+  &2ShatteredScrolls &7// &cNot enough arguments. Found %argc%, expected %argx%.
+too-many-args: >
+  &2ShatteredScrolls &7// &cToo many arguments. Found %argc%, expected %argx%.
+invalid-location: >
+  &2ShatteredScrolls &7// &cLocation '&f%location%&c' not found.
+teleport: >
+  &2ShatteredScrolls &7// &fTeleported to %location%.
+base-command-help: |
+  &7---------=[ &2ShatteredScrolls &aHelp &7]=---------
+  &2/%label% &8- &fShows this message.
+  &2/%label% location|loc|l &8- &fShows location commands.
+  &2/%label% scroll|s &8- &fShows scroll commands.
+scroll-command-help: |
+  &7---------=[ &2ShatteredScrolls &aScroll Help &7]=---------
+  &2/%label% &8- &fShows this message.
+  &2/%label% give|g &8- &fGives a scroll to a player.
+  &2/%label% get|i &8- &fGives a scroll to you.
+location-command-help: |
+  &7---------=[ &2ShatteredScrolls &aLocation Help &7]=---------
+  &2/%label% &8- &fShows this message.
+  &2/%label% add|a &8- &fAdds a location.
+  &2/%label% remove|rem|r &8- &fRemoves a location.
+  &2/%label% list|l &8- &fLists all locations.
+  &2/%label% edit|e &8- &fEdits a location.
+  &2/%label% teleport|tp &8- &fTeleports to a location.
