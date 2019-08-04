@@ -14,3 +14,42 @@ permissions:
   shatteredscrolls.use:
     default: true
     description: Allows players to use scrolls.
+  shatteredscrolls.admin:
+    default: op
+    description: Allows using admin commands.
+    children:
+      - shatteredscrolls.help
+      - shatteredscrolls.location.help
+      - shatteredscrolls.location.list
+      - shatteredscrolls.location.add
+      - shatteredscrolls.location.remove
+      - shatteredscrolls.location.edit
+      - shatteredscrolls.scroll.give
+      - shatteredscrolls.scroll.get
+  shatteredscrolls.help:
+    default: op
+    description: Allows viewing the help.
+  shatteredscrolls.location.help:
+    default: op
+    description: Allows viewing the location help.
+  shatteredscrolls.location.list:
+    default: op
+    description: Allows viewing the location list.
+  shatteredscrolls.location.add:
+    default: op
+    description: Allows adding locations.
+  shatteredscrolls.location.remove:
+    default: op
+    description: Allows removing locations.
+  shatteredscrolls.location.edit:
+    default: op
+    description: Allows editing locations.
+  shatteredscrolls.scroll.help:
+    default: op
+    description: Allows viewing the scroll help.
+  shatteredscrolls.scroll.give:
+    default: op
+    description: Allows giving scrolls to players.
+  shatteredscrolls.scroll.get:
+    default: op
+    description: Allows giving scrolls to the sender.
