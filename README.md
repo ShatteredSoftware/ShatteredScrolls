@@ -1,11 +1,16 @@
-![Header](./header.png)
+<p align="center"><img src="https://raw.githubusercontent.com/ShatteredSuite/ShatteredScrolls/master/header.png" alt=""/></p>
+
 -----
-[![GitHub](https://img.shields.io/github/license/ShatteredSuite/ShatteredScrolls?style=for-the-badge&logo=github)](https://github.com/ShatteredSuite/ShatteredScrolls/blob/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/ShatteredSuite/ShatteredScrolls?style=for-the-badge&logo=github)](https://github.com/ShatteredSuite/ShatteredScrolls/issues)
-[![GitHub Version](https://img.shields.io/github/release/ShatteredSuite/ShatteredScrolls?label=Github%20Version&style=for-the-badge&logo=github)](https://github.com/ShatteredSuite/ShatteredScrolls/releases)
-![Spigot Version](https://img.shields.io/spiget/version/128937421?label=Spigot%20Version&style=for-the-badge)
-[![Discord](https://img.shields.io/badge/Get%20Help-On%20Discord-%237289DA?style=for-the-badge&logo=discord)](https://discord.gg/zUbNX9t)
-[![Ko-Fi](https://img.shields.io/badge/Support-on%20Ko--fi-%23F16061?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/uberpilot#)
+<p align="center">
+<a href="https://github.com/ShatteredSuite/ShatteredScrolls/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/ShatteredSuite/ShatteredScrolls?style=for-the-badge&logo=github" /></a>
+<a href="https://github.com/ShatteredSuite/ShatteredScrolls/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/ShatteredSuite/ShatteredScrolls?style=for-the-badge&logo=github" /></a>
+<a href="https://github.com/ShatteredSuite/ShatteredScrolls/releases"><img alt="GitHub Version" src="https://img.shields.io/github/release/ShatteredSuite/ShatteredScrolls?label=Github%20Version&style=for-the-badge&logo=github" /></a>
+<!--
+<a href=""><img alt="Spigot Version" src="https://img.shields.io/spiget/version/128937421?label=Spigot%20Version&style=for-the-badge" /></a>
+-->
+<a href="https://discord.gg/zUbNX9t"><img alt="Discord" src="https://img.shields.io/badge/Get%20Help-On%20Discord-%237289DA?style=for-the-badge&logo=discord" /></a>
+<a href="ko-fi.com/uberpilot"><img alt="Ko-Fi" src="https://img.shields.io/badge/Support-on%20Ko--fi-%23F16061?style=for-the-badge&logo=ko-fi" /></a>
+</p>
 ## For Server Owners
 
 ### Prerequisites
