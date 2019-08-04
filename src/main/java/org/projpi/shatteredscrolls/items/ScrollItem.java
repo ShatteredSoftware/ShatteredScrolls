@@ -83,7 +83,9 @@ public class ScrollItem {
   }
 
   private void getNextItem(ItemProvider provider, Player player) {
-    stack.setAmount(stack.getAmount() - 1);
+    ItemStack toTake = new ItemStack(stack);
+    toTake.setAmount(1);
+    player.getInventory().removeItem(toTake);
     ItemStack newStack = provider.getItem();
     assert newStack != null;
     System.out.println(newStack);

@@ -1,5 +1,6 @@
 package org.projpi.shatteredscrolls.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,6 +28,10 @@ public class InteractListener implements Listener {
       return;
     }
     ItemStack stack = event.getPlayer().getInventory().getItemInMainHand();
+    if(stack.getAmount() == 0 || stack.getType() == Material.AIR)
+    {
+      return;
+    }
     // Ignore sneaking.
     if (event.getPlayer().isSneaking()) {
       return;
@@ -43,6 +48,7 @@ public class InteractListener implements Listener {
       System.out.println("Invalid item.");
       return;
     }
+    event.setCancelled(true);
     item.interact(player);
     instance.doCooldown(player);
   }
