@@ -29,17 +29,13 @@ public class InteractListener implements Listener
         {
             return;
         }
-        ItemStack stack = event.getItem();
-        if(stack == null)
-        {
-            return;
-        }
+        ItemStack stack = event.getPlayer().getInventory().getItemInMainHand();
         // Ignore sneaking.
         if(event.getPlayer().isSneaking())
         {
             return;
         }
-        if(!event.getPlayer().hasPermission("shatteredScrolls.use"))
+        if(!event.getPlayer().hasPermission("shatteredscrolls.use"))
         {
             return;
         }
@@ -51,9 +47,11 @@ public class InteractListener implements Listener
         ScrollItem item = new ScrollItem(stack);
         if(!item.isValid())
         {
+            System.out.println("Invalid item.");
             return;
         }
         item.interact(player);
+        instance.doCooldown(player);
     }
 
 }

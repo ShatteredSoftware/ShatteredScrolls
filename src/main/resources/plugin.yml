@@ -5,3 +5,12 @@ api-version: '1.13'
 authors: [UberPilot]
 description: A plugin that allows for teleportation scrolls.
 website: https://github.com/ShatteredSuite/ShatteredScrolls
+commands:
+  scrolls:
+    aliases:
+      - scr
+      - scrolls
+permissions:
+  shatteredscrolls.use:
+    default: true
+    description: Allows players to use scrolls.

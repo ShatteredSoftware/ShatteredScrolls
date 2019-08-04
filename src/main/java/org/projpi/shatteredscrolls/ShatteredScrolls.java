@@ -8,6 +8,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.projpi.shatteredscrolls.commands.BaseCommand;
+import org.projpi.shatteredscrolls.commands.ScrollCommand;
 import org.projpi.shatteredscrolls.config.ScrollConfig;
 import org.projpi.shatteredscrolls.config.ScrollCost;
 import org.projpi.shatteredscrolls.config.ScrollLocation;
@@ -65,6 +66,14 @@ public class ShatteredScrolls extends JavaPlugin implements Messageable
         loadMessages();
         loadConfig();
         loadLocations();
+
+        PluginCommand cmd = getCommand("scrolls");
+        if(cmd != null)
+        {
+            BaseCommand command = new BaseCommand(this);
+            cmd.setExecutor(command);
+            cmd.setTabCompleter(command);
+        }
 
         teleportCooldownManager = new CooldownManager(config.getCooldown());
 
@@ -131,7 +140,6 @@ public class ShatteredScrolls extends JavaPlugin implements Messageable
 
     private void loadConfig()
     {
-
         if(!getDataFolder().exists())
         {
             //noinspection ResultOfMethodCallIgnored
@@ -140,19 +148,7 @@ public class ShatteredScrolls extends JavaPlugin implements Messageable
         File configFile = new File(getDataFolder(), "config.yml");
         if(!configFile.exists())
         {
-            ScrollConfig config = ScrollConfig.deserialize(new LinkedHashMap<>());
-            YamlConfiguration yamlConfig = YamlConfiguration.loadConfiguration(configFile);
-            yamlConfig.set("config", config);
-            try
-            {
-                yamlConfig.save(configFile);
-            }
-            catch (IOException e)
-            {
-                getLogger().severe("Failed to save config. Using default values.");
-                this.config = config;
-                return;
-            }
+            saveResource("config.yml", false);
         }
         this.config = (ScrollConfig) YamlConfiguration.loadConfiguration(configFile).get("config");
     }

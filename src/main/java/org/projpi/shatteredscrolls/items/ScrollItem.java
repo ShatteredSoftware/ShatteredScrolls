@@ -1,7 +1,7 @@
 package org.projpi.shatteredscrolls.items;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -9,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.projpi.shatteredscrolls.ShatteredScrolls;
 import org.projpi.shatteredscrolls.config.ScrollCost;
+
+import java.util.HashMap;
 
 public class ScrollItem
 {
@@ -39,38 +41,6 @@ public class ScrollItem
         }
     }
 
-    public void update()
-    {
-        if(bindingType == ScrollItemNBT.BindingType.UNBOUND)
-        {
-            stack = ScrollItemBuilder.getUnboundScroll(stack.getAmount());
-        }
-        else if(bindingType == ScrollItemNBT.BindingType.POSITION)
-        {
-            if(position != null)
-            {
-                stack = ScrollItemBuilder.getBoundScroll(stack.getAmount(), charges, position);
-            }
-            else
-            {
-                position = ScrollItemNBT.getLocationFromScroll(stack);
-                stack = ScrollItemBuilder.getBoundScroll(stack.getAmount(), charges, position);
-            }
-        }
-        else if(bindingType == ScrollItemNBT.BindingType.LOCATION)
-        {
-            if(destination != null && !destination.isEmpty())
-            {
-                stack = ScrollItemBuilder.getBoundScroll(stack.getAmount(), charges, destination);
-            }
-            else
-            {
-                destination = ScrollItemNBT.getDestinationFromScroll(stack);
-                stack = ScrollItemBuilder.getBoundScroll(stack.getAmount(), charges, destination);
-            }
-        }
-    }
-
     public void interact(Player player)
     {
         ShatteredScrolls.getInstance().doCooldown(player);
@@ -78,23 +48,24 @@ public class ScrollItem
         Location newLoc;
         if(bindingType == ScrollItemNBT.BindingType.UNBOUND)
         {
-            stack.setAmount(stack.getAmount() - 1);
-            stack = ScrollItemBuilder.getBoundScroll(1, charges, player.getLocation());
-            player.getInventory().addItem(stack);
+            getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges, player.getLocation()), player);
             return;
         }
+        // Consume a charge.
+        charges--;
+        // Update the item.
         if(bindingType == ScrollItemNBT.BindingType.POSITION)
         {
-            newLoc = position;
-            stack = ScrollItemBuilder.getBoundScroll(1, charges, destination);
+            newLoc = ScrollItemNBT.getLocationFromScroll(stack);
+            getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges, newLoc), player);
         }
         else
         {
             newLoc = ShatteredScrolls.getInstance().getLocation(destination).getLocation();
-            stack = ScrollItemBuilder.getBoundScroll(1, charges, destination);
+            getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges, destination), player);
         }
-        charges--;
-        update();
+
+        // Do teleportation
         if(oldLoc.getWorld() != null)
         {
             oldLoc.getWorld().spawnParticle(Particle.PORTAL, oldLoc, 50, 0, 1, 0, 0.5F);
@@ -122,6 +93,19 @@ public class ScrollItem
             newLoc.getWorld().spawnParticle(Particle.PORTAL, oldLoc, 50, 0, 1, 0, 0.5F);
             newLoc.getWorld().playSound(oldLoc, Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
         }
+    }
+
+    private void getNextItem(ItemProvider provider, Player player)
+    {
+        stack.setAmount(stack.getAmount() - 1);
+        ItemStack newStack = provider.getItem();
+        System.out.println(newStack);
+        addItem(player, newStack);
+    }
+
+    private void addItem(Player player, ItemStack itemStack)
+    {
+        player.getInventory().addItem(itemStack);
     }
 
     public boolean isValid()

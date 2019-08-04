@@ -31,22 +31,24 @@ public class LocationAddCommand extends WrappedCommand
             return true;
         }
 
-        if(sender instanceof Player && args.length < 2)
+        if(sender instanceof Player && args.length < 3)
         {
             HashMap<String, String> msgArgs = new HashMap<>();
             msgArgs.put("label", label);
             msgArgs.put("argc", String.valueOf(args.length));
             msgArgs.put("argx", "at least 2");
             instance.getMessenger().sendErrorMessage(sender, "not-enough-args", msgArgs);
+            return true;
         }
 
-        if(sender instanceof ConsoleCommandSender && args.length < 8)
+        if(sender instanceof ConsoleCommandSender && args.length < 9)
         {
             HashMap<String, String> msgArgs = new HashMap<>();
             msgArgs.put("label", label);
             msgArgs.put("argc", String.valueOf(args.length));
             msgArgs.put("argx", "8");
             instance.getMessenger().sendErrorMessage(sender, "not-enough-args", msgArgs);
+            return true;
         }
 
         String id = args[0];

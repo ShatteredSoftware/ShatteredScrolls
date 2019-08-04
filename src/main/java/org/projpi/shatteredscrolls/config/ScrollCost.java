@@ -24,7 +24,7 @@ public class ScrollCost implements ConfigurationSerializable
     public Map<String, Object> serialize()
     {
         LinkedHashMap<String, Object> result = new LinkedHashMap<>();
-        result.put("type", type);
+        result.put("type", type.name());
         result.put("data", data);
         return result;
     }

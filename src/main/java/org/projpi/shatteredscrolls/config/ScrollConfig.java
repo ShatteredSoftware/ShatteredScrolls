@@ -51,7 +51,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable
         LinkedHashMap<String, Object> result = new LinkedHashMap<>();
         result.put("scroll-unbound-name", unboundName);
         result.put("scroll-bound-name", boundName);
-        result.put("scroll-material", material);
+        result.put("scroll-material", material.getKey().getKey());
         result.put("cooldown", cooldown);
         result.put("cost", cost);
         return result;
@@ -91,7 +91,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable
                 && map.get("scroll-bound-position-lore") instanceof String
                 && !((String) map.get("scroll-bound-position-lore")).isEmpty())
         {
-            boundName = ChatColor.translateAlternateColorCodes('&', (String) map.get("scroll-bound-position-lore"));
+            boundPositionLore = ChatColor.translateAlternateColorCodes('&', (String) map.get("scroll-bound-position-lore"));
         }
 
         String boundLocationLore = "§7A bound teleportation scroll." +
@@ -102,28 +102,28 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable
                 && map.get("scroll-bound-location-lore") instanceof String
                 && !((String) map.get("scroll-bound-location-lore")).isEmpty())
         {
-            boundName = ChatColor.translateAlternateColorCodes('&', (String) map.get("scroll-bound-location-lore"));
+            boundLocationLore = ChatColor.translateAlternateColorCodes('&', (String) map.get("scroll-bound-location-lore"));
         }
 
         boolean unboundGlow = false;
         if (map.containsKey("scroll-unbound-glow") && map.get("scroll-unbound-glow") instanceof Boolean)
         {
-            unboundGlow = (boolean) map.get("scroll-bound-location-lore");
+            unboundGlow = (boolean) map.get("scroll-unbound-glow");
         }
 
         boolean boundGlow = true;
         if (map.containsKey("scroll-bound-glow") && map.get("scroll-bound-glow") instanceof Boolean)
         {
-            boundGlow = (boolean) map.get("scroll-bound-location-lore");
+            boundGlow = (boolean) map.get("scroll-bound-glow");
         }
 
-        Material material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial("BOOK");
+        Material material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial("PAPER");
         if (map.containsKey("scroll-material") && map.get("scroll-material") instanceof String)
         {
             material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial("scroll-material");
             if(material == null)
             {
-                material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial("BOOK");
+                material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial("PAPER");
             }
         }
 
