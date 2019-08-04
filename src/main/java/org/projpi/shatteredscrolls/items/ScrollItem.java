@@ -66,12 +66,17 @@ public class ScrollItem
         }
 
         // Do teleportation
-        if(oldLoc.getWorld() != null)
+        doTeleport(oldLoc, newLoc, player);
+    }
+
+    private void doTeleport(Location oldLocation, Location newLocation, Player player)
+    {
+        if(oldLocation.getWorld() != null)
         {
-            oldLoc.getWorld().spawnParticle(Particle.PORTAL, oldLoc, 50, 0, 1, 0, 0.5F);
-            oldLoc.getWorld().playSound(oldLoc, Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
+            oldLocation.getWorld().spawnParticle(Particle.PORTAL, oldLocation, 50, 0, 1, 0, 0.5F);
+            oldLocation.getWorld().playSound(oldLocation, Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
         }
-        player.teleport(newLoc);
+        player.teleport(newLocation);
         ScrollCost cost = ShatteredScrolls.getInstance().config().getCost();
         switch (cost.getType())
         {
@@ -88,10 +93,10 @@ public class ScrollItem
                 player.addPotionEffect((PotionEffect) cost.getData());
                 break;
         }
-        if(newLoc.getWorld() != null)
+        if(newLocation.getWorld() != null)
         {
-            newLoc.getWorld().spawnParticle(Particle.PORTAL, oldLoc, 50, 0, 1, 0, 0.5F);
-            newLoc.getWorld().playSound(oldLoc, Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
+            newLocation.getWorld().spawnParticle(Particle.PORTAL, newLocation, 50, 0, 1, 0, 0.5F);
+            newLocation.getWorld().playSound(newLocation, Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
         }
     }
 
@@ -99,13 +104,9 @@ public class ScrollItem
     {
         stack.setAmount(stack.getAmount() - 1);
         ItemStack newStack = provider.getItem();
+        assert newStack != null;
         System.out.println(newStack);
-        addItem(player, newStack);
-    }
-
-    private void addItem(Player player, ItemStack itemStack)
-    {
-        player.getInventory().addItem(itemStack);
+        player.getInventory().addItem(newStack);
     }
 
     public boolean isValid()
