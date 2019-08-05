@@ -1,3 +1,5 @@
 package org.projpi.shatteredscrolls.api;
 
-public interface LocationAPI {}
+public interface LocationAPI {
+
+}
