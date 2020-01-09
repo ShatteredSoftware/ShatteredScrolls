@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.projpi.shatteredscrolls.ShatteredScrolls;
 import org.projpi.shatteredscrolls.config.ScrollCost;
+import org.projpi.shatteredscrolls.config.ScrollLocation;
 
 public class ScrollItem {
 
@@ -49,7 +50,19 @@ public class ScrollItem {
             newLoc = ScrollItemNBT.getLocationFromScroll(stack);
             getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges, newLoc), player);
         } else {
-            newLoc = ShatteredScrolls.getInstance().getLocation(destination).getLocation();
+            ScrollLocation dest = ShatteredScrolls.getInstance().getLocation(destination);
+            if(dest == null) {
+                if(ShatteredScrolls.getInstance().config().doesRefundInvalid()) {
+                    ShatteredScrolls.getInstance().getMessenger().sendImportantMessage(player, "refunded-location");
+                    getNextItem(() -> ScrollItemBuilder.getUnboundScroll(1, charges + 1), player);
+                }
+                else {
+                    ShatteredScrolls.getInstance().getMessenger().sendImportantMessage(player, "bound-invalid-location");
+                    getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges + 1, destination), player);
+                }
+                return;
+            }
+            newLoc = dest.getLocation();
             getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges, destination), player);
         }
 
@@ -90,7 +103,6 @@ public class ScrollItem {
         player.getInventory().removeItem(toTake);
         ItemStack newStack = provider.getItem();
         assert newStack != null;
-        System.out.println(newStack);
         player.getInventory().addItem(newStack);
     }
 

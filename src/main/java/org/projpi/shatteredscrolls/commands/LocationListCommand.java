@@ -10,10 +10,12 @@ import org.projpi.util.commands.WrappedCommand;
 public class LocationListCommand extends WrappedCommand {
 
     private final ShatteredScrolls instance;
+    private final LocationCommand parent;
 
-    public LocationListCommand(ShatteredScrolls instance, WrappedCommand parent) {
+    public LocationListCommand(ShatteredScrolls instance, LocationCommand parent) {
         super(instance, parent, "list", "shatteredscrolls.location.list", "location-list-cmd-help");
         this.instance = instance;
+        this.parent = parent;
         addAlias("l");
     }
 
@@ -26,9 +28,7 @@ public class LocationListCommand extends WrappedCommand {
         Collection<ScrollLocation> locations = instance.getLocations();
         instance.getMessenger().sendMessage(sender, "location-list-header");
         for (ScrollLocation location : locations) {
-            HashMap<String, String> msgArgs = new HashMap<>();
-            msgArgs.put("id", location.getId());
-            msgArgs.put("name", location.getName());
+            HashMap<String, String> msgArgs = parent.parent.buildArgs(location);
             instance.getMessenger().sendMessage(sender, "location-list-item", msgArgs);
         }
         return true;

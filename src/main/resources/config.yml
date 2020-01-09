@@ -2,21 +2,25 @@ config:
   ==: ScrollConfig # DO NOT DELETE THIS LINE!
   scroll-unbound-name: "&bUnbound Teleportation Scroll"
   scroll-unbound-lore: |-
-    &8---=[ &7Description &7]=---
+    &8---=[ &7Description &8]=---
     &7An unbound teleportation scroll.
     &7Right click it to bind it to your location.
+    &7It has &f%charges%&7 charges.
   scroll-bound-name: "&bTeleportation Scroll"
   scroll-bound-position-lore: |-
-    &8---=[ &7Description &7]=---
+    &8---=[ &7Description &8]=---
     &7A bound teleportation scroll.
     &7It goes to &f%x% %y% %z%&7 in &f%world%&7.
+    &7It has &f%charges%&7 charges remaining.
   scroll-bound-location-lore: |-
-    &8---=[ &7Description &7]=---
+    &8---=[ &7Description &8]=---
     &7A bound teleportation scroll.
     &7It goes to &f%destination%&7.
+    &7It has &f%charges%&7 charges remaining.
   scroll-unbound-glow: false
   scroll-bound-glow: true
   scroll-material: PAPER
+  refund-invalid: true
   cooldown: 5000 # Cooldown between usages. Minimum 10.
   model: 0 # Sets custom model data if the server supports it.
   charges: 5 # The default number of charges.

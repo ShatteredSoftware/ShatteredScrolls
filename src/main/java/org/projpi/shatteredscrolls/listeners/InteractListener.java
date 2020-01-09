@@ -45,7 +45,6 @@ public class InteractListener implements Listener {
         Player player = event.getPlayer();
         ScrollItem item = new ScrollItem(stack);
         if (!item.isValid()) {
-            System.out.println("Invalid item.");
             return;
         }
         event.setCancelled(true);

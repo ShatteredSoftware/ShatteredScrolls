@@ -23,9 +23,10 @@ public class ScrollGetCommand extends WrappedCommand {
     private final ScrollCommand parent;
 
     public ScrollGetCommand(ShatteredScrolls instance, ScrollCommand parent) {
-        super(instance, parent, "get", "shatteredscrolls.scroll.get", "scroll-edit-cmd-help");
+        super(instance, parent, "get", "shatteredscrolls.scroll.get", "scroll-get-cmd-help");
         this.instance = instance;
         this.parent = parent;
+        this.addAlias("i");
     }
 
     @Override
@@ -43,7 +44,7 @@ public class ScrollGetCommand extends WrappedCommand {
         if (args.length < 1) {
             HashMap<String, String> msgArgs = new HashMap<>();
             msgArgs.put("label", label);
-            instance.getMessenger().sendMessage(sender, "scroll-edit-cmd-help", msgArgs);
+            instance.getMessenger().sendMessage(sender, "scroll-get-cmd-help", msgArgs);
             return true;
         }
 

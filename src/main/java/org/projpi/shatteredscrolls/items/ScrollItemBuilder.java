@@ -4,6 +4,8 @@ import java.util.Arrays;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.projpi.shatteredscrolls.ShatteredScrolls;
@@ -20,18 +22,7 @@ public class ScrollItemBuilder {
     }
 
     public static ItemStack getUnboundScroll(int count) {
-        ItemStack stack = new ItemStack(config.getMaterial(), count);
-        stack = ScrollItemNBT.setUnbound(stack);
-
-        ItemMeta meta = stack.getItemMeta();
-        if (meta != null) {
-            meta.setDisplayName(config.getUnboundName());
-            String lore = config.getUnboundLore();
-            meta.setLore(Arrays.asList(WordUtils.wrap(lore, 80).split("\n")));
-            stack.setItemMeta(meta);
-            stack = materialUtil.setCustomModelData(stack, config.getCustomModelData());
-        }
-        return stack;
+        return getUnboundScroll(count, config.getCharges());
     }
 
     public static ItemStack getUnboundScroll(int count, int charges) {
@@ -46,9 +37,20 @@ public class ScrollItemBuilder {
         ItemMeta meta = stack.getItemMeta();
         if (meta != null) {
             meta.setDisplayName(config.getUnboundName());
-            String lore = config.getUnboundLore();
-            meta.setLore(Arrays.asList(WordUtils.wrap(lore, 80).split("\n")));
+            String lore = config.getUnboundLore()
+                .replaceAll("%charges%", String.valueOf(charges));
+            meta.setLore(Arrays.asList(lore.split("\n")));
             stack.setItemMeta(meta);
+            if(config.doesUnboundGlow()) {
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                if(config.getMaterial() != materialUtil.matchMaterial("arrow")) {
+                    meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+                }
+                else
+                {
+                    meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+                }
+            }
             stack = materialUtil.setCustomModelData(stack, config.getCustomModelData());
         }
         return stack;
@@ -84,8 +86,19 @@ public class ScrollItemBuilder {
             if (destination.getWorld() != null) {
                 lore = lore.replaceAll("%world%", destination.getWorld().getName());
             }
-            meta.setLore(Arrays.asList(WordUtils.wrap(lore, 80).split("\n")));
+            meta.setLore(Arrays.asList(lore.split("\n")));
+            if(config.doesBoundGlow()) {
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                if(config.getMaterial() != materialUtil.matchMaterial("arrow")) {
+                    meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+                }
+                else
+                {
+                    meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+                }
+            }
             stack.setItemMeta(meta);
+            stack = materialUtil.setCustomModelData(stack, config.getCustomModelData());
         }
         return stack;
     }
@@ -111,10 +124,22 @@ public class ScrollItemBuilder {
             meta.setDisplayName(config.getBoundName());
             String lore =
                 config
-                    .getBoundPositionLore()
-                    .replaceAll("%world%", instance.getLocation(destination).getName())
+                    .getBoundLocationLore()
+                    .replaceAll("%destination%", instance.getLocation(destination).getName())
                     .replaceAll("%charges%", String.valueOf(charges));
-            meta.setLore(Arrays.asList(WordUtils.wrap(lore, 80).split("\n")));
+            meta.setLore(Arrays.asList(lore.split("\n")));
+            if(config.doesBoundGlow()) {
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                if(config.getMaterial() != materialUtil.matchMaterial("arrow")) {
+                    meta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+                }
+                else
+                {
+                    meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+                }
+            }
+            stack.setItemMeta(meta);
+            stack = materialUtil.setCustomModelData(stack, config.getCustomModelData());
         }
         return stack;
     }

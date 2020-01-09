@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 import org.projpi.shatteredscrolls.ShatteredScrolls;
+import org.projpi.shatteredscrolls.config.ScrollLocation;
 import org.projpi.util.commands.WrappedCommand;
 
 public class BaseCommand extends WrappedCommand {
@@ -22,6 +23,7 @@ public class BaseCommand extends WrappedCommand {
         this.instance = instance;
         this.registerSubcommand(new ScrollCommand(instance, this));
         this.registerSubcommand(new LocationCommand(instance, this));
+        this.registerSubcommand(new ReloadCommand(instance, this));
     }
 
     String getLocation(String[] args, int index, CommandSender sender) {
@@ -29,6 +31,7 @@ public class BaseCommand extends WrappedCommand {
         if (org.projpi.util.StringUtil.isEmptyOrNull(location) || !instance.hasLocation(location)) {
             HashMap<String, String> msgArgs = new HashMap<>();
             msgArgs.put("input", args[index]);
+            msgArgs.put("id", location);
             instance.getMessenger().sendErrorMessage(sender, "invalid-location", msgArgs);
             return null;
         }
@@ -127,7 +130,7 @@ public class BaseCommand extends WrappedCommand {
                 World world = instance.getServer().getWorld(args[startIndex + 3]);
                 if (world == null) {
                     HashMap<String, String> msgArgs = new HashMap<>();
-                    msgArgs.put("input", args[startIndex + 3]);
+                    msgArgs.put("world", args[startIndex + 3]);
                     instance.getMessenger().sendErrorMessage(sender, "world-not-found", msgArgs);
                     return null;
                 }
@@ -256,5 +259,21 @@ public class BaseCommand extends WrappedCommand {
         StringUtil.copyPartialMatches(args[startIndex], instance.getLocationKeys(), completions);
         Collections.sort(completions);
         return completions;
+    }
+
+    public HashMap<String, String> buildArgs(ScrollLocation loc) {
+        HashMap<String, String> msgArgs = new HashMap<>();
+        msgArgs.put("location", loc.toString());
+        msgArgs.put("id", loc.getId());
+        msgArgs.put("name", loc.getName());
+        msgArgs.put("x", String.valueOf(loc.getLocation().getBlockX()));
+        msgArgs.put("y", String.valueOf(loc.getLocation().getBlockY()));
+        msgArgs.put("z", String.valueOf(loc.getLocation().getBlockZ()));
+        msgArgs.put("pitch", String.valueOf(loc.getLocation().getPitch()));
+        msgArgs.put("yaw", String.valueOf(loc.getLocation().getYaw()));
+        if(loc.getLocation().getWorld() != null) {
+            msgArgs.put("world", loc.getLocation().getWorld().getName());
+        }
+        return msgArgs;
     }
 }

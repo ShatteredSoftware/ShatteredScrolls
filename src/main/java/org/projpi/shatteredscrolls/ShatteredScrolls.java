@@ -25,10 +25,12 @@ import org.projpi.util.messages.Messenger;
 import org.projpi.util.nms.MaterialUtil12;
 import org.projpi.util.nms.MaterialUtil13;
 import org.projpi.util.nms.MaterialUtil14;
+import org.projpi.util.nms.MaterialUtil15;
 import org.projpi.util.nms.NBTUtil;
 import org.projpi.util.nms.NBTUtil12;
 import org.projpi.util.nms.NBTUtil13;
 import org.projpi.util.nms.NBTUtil14;
+import org.projpi.util.nms.NBTUtil15;
 
 public class ShatteredScrolls extends JavaPlugin implements Messageable {
 
@@ -158,6 +160,10 @@ public class ShatteredScrolls extends JavaPlugin implements Messageable {
             getLogger().info("Loaded compatibility for 1.14.");
             nbtUtil = new NBTUtil14();
             materialUtil = new MaterialUtil14();
+        } else if (Bukkit.getVersion().contains("1.15")) {
+            getLogger().info("Loaded compatibility for 1.15.");
+            nbtUtil = new NBTUtil15();
+            materialUtil = new MaterialUtil15();
         } else {
             getLogger().severe("Could not load compatibility for this version. Disabling.");
             getServer().getPluginManager().disablePlugin(this);

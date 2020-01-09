@@ -4,31 +4,70 @@ reloading: >
   Using the editing commands or restarting is recommended.
 reloaded: >
   &2ShatteredScrolls &7// &eReloaded.
-invalid-number-format-args: >
+invalid-number-format: >
   &2ShatteredScrolls &7// &cInvalid number format. Expected a number, got '&f%input%&c'.
 not-enough-args: >
   &2ShatteredScrolls &7// &cNot enough arguments. Found %argc%, expected %argx%.
 too-many-args: >
   &2ShatteredScrolls &7// &cToo many arguments. Found %argc%, expected %argx%.
+position-failed: >
+  &2ShatteredScrolls &7// &cFailed to get location from given data.
+player-not-found: >
+  &2ShatteredScrolls &7// &cPlayer '&f%player%&c' not found.
+world-not-found: >
+  &2ShatteredScrolls &7// &cWorld '&f%world%&c' not found.
 invalid-location: >
-  &2ShatteredScrolls &7// &cLocation '&f%location%&c' not found.
-teleport: >
-  &2ShatteredScrolls &7// &fTeleported to %location%.
-base-command-help: |
+  &2ShatteredScrolls &7// &cLocation '&f%id%&c' not found.
+refunded-location: >
+  &2ShatteredScrolls &7// &eThe location this was bound to no longer exists. It has been unbound.
+bound-invalid-location: >
+  &2ShatteredScrolls &7// &eThe location this was bound to no longer exists.
+teleported: >
+  &2ShatteredScrolls &7// &fTeleported to %name%.
+location-added: >
+  &2ShatteredScrolls &7// &fLocation %name% (%id%) added.
+location-name-set: >
+  &2ShatteredScrolls &7// &fLocation %id% name set to %name%.
+location-location-set: >
+  &2ShatteredScrolls &7// &fLocation %id% location set to %x% %y% %z% in %world%.
+location-removed: >
+  &2ShatteredScrolls &7// &fLocation %name% (%id%) removed.
+scroll-get-cmd-help: >
+  &2ShatteredScrolls &7// &fUsage: /%label% <unbound | position | location> [charges] [count]
+scroll-give-cmd-help: >
+  &2ShatteredScrolls &7// &fUsage: /%label% <player> <unbound | position | location> [charges] [count]
+location-remove-cmd-help: >
+  &2ShatteredScrolls &7// &fUsage: /%label% <id>
+location-add-cmd-help: >
+  &2ShatteredScrolls &7// &fUsage: /%label% <id> <name> [x] [y] [z] [world] [pitch] [yaw]
+location-edit-name-cmd-help: >
+  &2ShatteredScrolls &7// &fUsage: /%label% <id> <name>
+location-edit-location-cmd-help: >
+  &2ShatteredScrolls &7// &fUsage: /%label% <id> [x] [y] [z] [world] [pitch] [yaw]
+location-list-header: >
+  &7---------=[ &2ShatteredScrolls &aLocations &7]=---------
+location-list-item: >
+  &7 - &a%name% &7(%id%) &f@ %x%, %y%, %z% in %world%
+base-cmd-help: |
   &7---------=[ &2ShatteredScrolls &aHelp &7]=---------
   &2/%label% &8- &fShows this message.
-  &2/%label% location|loc|l &8- &fShows location commands.
-  &2/%label% scroll|s &8- &fShows scroll commands.
-scroll-command-help: |
+  &2/%label% location | loc | l &8- &fShows location commands.
+  &2/%label% scroll | s &8- &fShows scroll commands.
+scroll-cmd-help: |
   &7---------=[ &2ShatteredScrolls &aScroll Help &7]=---------
   &2/%label% &8- &fShows this message.
-  &2/%label% give|g &8- &fGives a scroll to a player.
-  &2/%label% get|i &8- &fGives a scroll to you.
-location-command-help: |
+  &2/%label% give | g &8- &fGives a scroll to a player.
+  &2/%label% get | i &8- &fGives a scroll to you.
+location-cmd-help: |
   &7---------=[ &2ShatteredScrolls &aLocation Help &7]=---------
   &2/%label% &8- &fShows this message.
-  &2/%label% add|a &8- &fAdds a location.
-  &2/%label% remove|rem|r &8- &fRemoves a location.
-  &2/%label% list|l &8- &fLists all locations.
-  &2/%label% edit|e &8- &fEdits a location.
-  &2/%label% teleport|tp &8- &fTeleports to a location.
+  &2/%label% add | a &8- &fAdds a location.
+  &2/%label% remove | rem | r &8- &fRemoves a location.
+  &2/%label% list | l &8- &fLists all locations.
+  &2/%label% edit | e &8- &fEdits a location.
+  &2/%label% teleport | tp &8- &fTeleports to a location.
+location-edit-cmd-help: |
+  &7---------=[ &2ShatteredScrolls &aLocation Help &7]=---------
+  &2/%label% &8- &fShows this message.
+  &2/%label% name | n &8- &fAdds a location.
+  &2/%label% location | loc | l  &8- &fSets the location.

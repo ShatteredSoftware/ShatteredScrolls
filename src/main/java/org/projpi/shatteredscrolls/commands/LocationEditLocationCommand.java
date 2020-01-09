@@ -45,9 +45,13 @@ public class LocationEditLocationCommand extends WrappedCommand {
             instance.getLocation(parent.parent.parent.getLocation(args, 0, sender));
         Location location = parent.parent.parent.getPosition(args, 1, sender);
         if (location == null) {
+            HashMap<String, String> msgArgs = new HashMap<>();
+            instance.getMessenger().sendMessage(sender, "failed-position", msgArgs);
             return true;
         }
         scrollLoc.location = location;
+        HashMap<String, String> msgArgs = parent.parent.parent.buildArgs(scrollLoc);
+        instance.getMessenger().sendMessage(sender, "location-location-set", msgArgs);
         return true;
     }
 

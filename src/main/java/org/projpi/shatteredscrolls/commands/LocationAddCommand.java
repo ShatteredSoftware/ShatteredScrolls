@@ -27,7 +27,7 @@ public class LocationAddCommand extends WrappedCommand {
             return true;
         }
 
-        if (sender instanceof Player && args.length < 3) {
+        if (sender instanceof Player && args.length < 2) {
             HashMap<String, String> msgArgs = new HashMap<>();
             msgArgs.put("label", label);
             msgArgs.put("argc", String.valueOf(args.length));
@@ -48,9 +48,14 @@ public class LocationAddCommand extends WrappedCommand {
         String id = args[0];
         String name = args[1];
         Location location = parent.parent.getPosition(args, 2, sender);
+        if(location == null) {
+            return true;
+        }
         ScrollLocation loc = new ScrollLocation(id, name, location);
 
         instance.addLocation(loc);
+        HashMap<String, String> msgArgs = parent.parent.buildArgs(loc);
+        instance.getMessenger().sendMessage(sender, "location-added", msgArgs);
 
         return true;
     }

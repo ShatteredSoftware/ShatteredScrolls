@@ -8,7 +8,7 @@ public class LocationCommand extends WrappedCommand {
     final BaseCommand parent;
 
     public LocationCommand(ShatteredScrolls instance, BaseCommand parent) {
-        super(instance, parent, "location", "shatteredscrolls.location.help", "scroll-cmd-help");
+        super(instance, parent, "location", "shatteredscrolls.location.help", "location-cmd-help");
         this.parent = parent;
         addAlias("l");
         addAlias("loc");
@@ -16,5 +16,6 @@ public class LocationCommand extends WrappedCommand {
         registerSubcommand(new LocationAddCommand(instance, this));
         registerSubcommand(new LocationRemoveCommand(instance, this));
         registerSubcommand(new LocationEditCommand(instance, this));
+        registerSubcommand(new LocationListCommand(instance, this));
     }
 }

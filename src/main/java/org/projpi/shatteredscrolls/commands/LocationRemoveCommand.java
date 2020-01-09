@@ -49,8 +49,7 @@ public class LocationRemoveCommand extends WrappedCommand {
 
         ScrollLocation scrollLoc = instance.getLocation(parent.parent.getLocation(args, 0, sender));
 
-        HashMap<String, String> msgArgs = new HashMap<>();
-        msgArgs.put("location", scrollLoc.getName());
+        HashMap<String, String> msgArgs = parent.parent.buildArgs(scrollLoc);
         instance.removeLocation(args[0]);
 
         instance.getMessenger().sendMessage(sender, "location-removed", msgArgs);

@@ -62,4 +62,12 @@ public class ScrollLocation implements ConfigurationSerializable, Cloneable {
     public String getId() {
         return id;
     }
+
+    public String toString() {
+        String res = name + " (" + id + ") @ " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ();
+        if(location.getWorld() != null) {
+            res += " in world " + location.getWorld().getName();
+        }
+        return res;
+    }
 }

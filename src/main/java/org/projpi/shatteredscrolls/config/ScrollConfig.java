@@ -13,6 +13,7 @@ import org.projpi.shatteredscrolls.ShatteredScrolls;
 @SerializableAs("ScrollConfig")
 public class ScrollConfig implements Cloneable, ConfigurationSerializable {
 
+    private boolean refundInvalid;
     private String unboundName;
     private String unboundLore;
     private String boundName;
@@ -34,6 +35,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         String boundPositionLore,
         boolean unboundGlow,
         boolean boundGlow,
+        boolean refundInvalid,
         int customModelData,
         Material material,
         int cooldown,
@@ -46,6 +48,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         this.boundPositionLore = boundPositionLore;
         this.unboundGlow = unboundGlow;
         this.boundGlow = boundGlow;
+        this.refundInvalid = refundInvalid;
         this.customModelData = customModelData;
         this.material = material;
         this.cooldown = cooldown;
@@ -112,6 +115,12 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
             unboundGlow = (boolean) map.get("scroll-unbound-glow");
         }
 
+        boolean refundInvalid = false;
+        if (map.containsKey("refund-invalid")
+            && map.get("refund-invalid") instanceof Boolean) {
+            refundInvalid = (boolean) map.get("refund-invalid");
+        }
+
         boolean boundGlow = true;
         if (map.containsKey("scroll-bound-glow") && map
             .get("scroll-bound-glow") instanceof Boolean) {
@@ -150,6 +159,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
             boundPositionLore,
             unboundGlow,
             boundGlow,
+            refundInvalid,
             customModelData,
             material,
             cooldown,
@@ -225,5 +235,9 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
 
     public String getUnboundLore() {
         return unboundLore;
+    }
+
+    public boolean doesRefundInvalid() {
+        return refundInvalid;
     }
 }

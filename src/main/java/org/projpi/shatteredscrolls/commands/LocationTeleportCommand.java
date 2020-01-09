@@ -49,8 +49,7 @@ public class LocationTeleportCommand extends WrappedCommand {
 
         ScrollLocation scrollLoc = instance.getLocation(parent.parent.getLocation(args, 0, sender));
 
-        HashMap<String, String> msgArgs = new HashMap<>();
-        msgArgs.put("location", scrollLoc.getName());
+        HashMap<String, String> msgArgs = parent.parent.buildArgs(scrollLoc);
         instance.getMessenger().sendMessage(sender, "teleported", msgArgs);
 
         ((Player) sender).teleport(scrollLoc.getLocation());
