@@ -44,7 +44,7 @@ public class LocationEditNameCommand extends WrappedCommand {
         for (String str : name) {
             builder.append(" ").append(str);
         }
-        scrollLoc.name = builder.toString();
+        scrollLoc.name = builder.toString().trim();
         HashMap<String, String> msgArgs = parent.parent.parent.buildArgs(scrollLoc);
         instance.getMessenger().sendMessage(sender, "location-name-set", msgArgs);
         return true;
