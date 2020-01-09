@@ -23,7 +23,6 @@ public class BaseCommand extends WrappedCommand {
         this.instance = instance;
         this.registerSubcommand(new ScrollCommand(instance, this));
         this.registerSubcommand(new LocationCommand(instance, this));
-        this.registerSubcommand(new ReloadCommand(instance, this));
     }
 
     String getLocation(String[] args, int index, CommandSender sender) {
