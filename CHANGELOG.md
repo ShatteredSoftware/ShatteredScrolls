@@ -1,4 +1,9 @@
 [icon]: https://raw.githubusercontent.com/ShatteredSuite/ShatteredScrolls/master/icon.png
+## ![Icon][icon] Version 1.0.1
+
+#### Changes
+
+* Fix bug that was disabling crafting.
 
 ## ![Icon][icon] Version 1.0.0
 
