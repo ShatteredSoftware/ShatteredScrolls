@@ -11,9 +11,6 @@ public class RecipeHandler {
     public static void addRecipe(ShatteredScrolls plugin) {
         NamespacedKey key = new NamespacedKey(plugin, "teleport_scroll");
         ItemStack unboundScroll = ScrollItemBuilder.getUnboundScroll(1);
-        if(plugin.getServer().getRecipesFor(unboundScroll).size() > 0) {
-            return;
-        }
 
         ShapedRecipe recipe = new ShapedRecipe(key, unboundScroll);
         recipe.shape(" E ", "EPE", " E ");
