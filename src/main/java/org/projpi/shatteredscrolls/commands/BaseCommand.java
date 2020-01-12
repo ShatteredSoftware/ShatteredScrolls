@@ -26,15 +26,25 @@ public class BaseCommand extends WrappedCommand {
     }
 
     String getLocation(String[] args, int index, CommandSender sender) {
-        String location = args[index];
-        if (org.projpi.util.StringUtil.isEmptyOrNull(location) || !instance.hasLocation(location)) {
+        if(args.length >= index + 1) {
+            String location = args[index];
+            if (org.projpi.util.StringUtil.isEmptyOrNull(location) || !instance
+                .hasLocation(location)) {
+                HashMap<String, String> msgArgs = new HashMap<>();
+                msgArgs.put("input", args[index]);
+                msgArgs.put("id", location);
+                instance.getMessenger().sendErrorMessage(sender, "invalid-location", msgArgs);
+                return null;
+            }
+            return location;
+        }
+        else {
             HashMap<String, String> msgArgs = new HashMap<>();
-            msgArgs.put("input", args[index]);
-            msgArgs.put("id", location);
-            instance.getMessenger().sendErrorMessage(sender, "invalid-location", msgArgs);
+            msgArgs.put("argc", String.valueOf(args.length));
+            msgArgs.put("argx", String.valueOf(index + 1));
+            instance.getMessenger().sendErrorMessage(sender, "not-enough-args", msgArgs);
             return null;
         }
-        return location;
     }
 
     Integer getCharges(String[] args, int index, CommandSender sender) {
