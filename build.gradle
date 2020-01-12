@@ -48,11 +48,6 @@ shadowJar {
     relocate('org.projpi.utilities', packagePath + '.dependencies')
 }
 
-task copyToTestServer(type: Sync) {
-    from shadowJar
-    into "C:\\Users\\Hunter\\Documents\\Servers\\PluginTest\\plugins"
-}
-
 import org.apache.tools.ant.filters.ReplaceTokens
 
 processResources {
