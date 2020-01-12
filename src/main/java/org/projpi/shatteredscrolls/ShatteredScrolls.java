@@ -89,7 +89,9 @@ public class ShatteredScrolls extends JavaPlugin implements Messageable {
 
         getServer().getPluginManager().registerEvents(new InteractListener(this), this);
 
-        RecipeHandler.addRecipe(this);
+        if(config.doesAllowCrafting()) {
+            RecipeHandler.addRecipe(this);
+        }
         getServer()
             .getScheduler()
             .runTaskTimerAsynchronously(this, this::save, 20 * 60 * 10, 20 * 60 * 10);

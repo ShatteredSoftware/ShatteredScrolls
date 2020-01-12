@@ -206,4 +206,8 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
     public boolean doesRefundInvalid() {
         return refundInvalid;
     }
+
+    public boolean doesAllowCrafting() {
+        return allowCrafting;
+    }
 }
