@@ -40,6 +40,9 @@ public class BaseCommand extends WrappedCommand {
     Integer getCharges(String[] args, int index, CommandSender sender) {
         int charges = instance.config().getCharges();
         if (args.length >= index + 1) {
+            if(args[index].equalsIgnoreCase("infinity")) {
+                return -1024;
+            }
             try {
                 charges = Integer.parseInt(args[index]);
             } catch (NumberFormatException ex) {

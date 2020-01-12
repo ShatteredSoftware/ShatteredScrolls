@@ -12,7 +12,7 @@ import org.projpi.util.commands.WrappedCommand;
 public class ScrollCommand extends WrappedCommand {
 
     private static final List<String> options = Arrays.asList("unbound", "location", "position");
-    private static final List<String> chargeOptions = Arrays.asList("1", "3", "5");
+    private static final List<String> chargeOptions = Arrays.asList("1", "3", "5", "infinity");
     private static final List<String> countOptions = Arrays.asList("1", "64");
     final BaseCommand parent;
     private final ShatteredScrolls instance;

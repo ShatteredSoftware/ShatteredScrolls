@@ -61,7 +61,7 @@ public class ScrollItemBuilder {
     }
 
     public static ItemStack getBoundScroll(int count, int charges, Location destination) {
-        if (charges <= 0) {
+        if (charges <= 0 && charges != -1024) {
             return new ItemStack(Material.AIR);
         }
 
@@ -82,7 +82,7 @@ public class ScrollItemBuilder {
                     .replaceAll("%x%", String.valueOf(destination.getBlockX()))
                     .replaceAll("%y%", String.valueOf(destination.getBlockY()))
                     .replaceAll("%z%", String.valueOf(destination.getBlockZ()))
-                    .replaceAll("%charges%", String.valueOf(charges));
+                    .replaceAll("%charges%", charges != -1024 ? String.valueOf(charges) : "∞");
             if (destination.getWorld() != null) {
                 lore = lore.replaceAll("%world%", destination.getWorld().getName());
             }
@@ -108,7 +108,7 @@ public class ScrollItemBuilder {
     }
 
     public static ItemStack getBoundScroll(int count, int charges, String destination) {
-        if (charges <= 0) {
+        if (charges <= 0 && charges != -1024) {
             return new ItemStack(Material.AIR);
         }
 
@@ -126,7 +126,7 @@ public class ScrollItemBuilder {
                 config
                     .getBoundLocationLore()
                     .replaceAll("%destination%", instance.getLocation(destination).getName())
-                    .replaceAll("%charges%", String.valueOf(charges));
+                    .replaceAll("%charges%", charges != -1024 ? String.valueOf(charges) : "∞");
             meta.setLore(Arrays.asList(lore.split("\n")));
             if(config.doesBoundGlow()) {
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
