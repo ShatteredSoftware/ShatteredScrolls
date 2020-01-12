@@ -1,4 +1,14 @@
 [icon]: https://raw.githubusercontent.com/ShatteredSuite/ShatteredScrolls/master/icon.png
+## ![Icon][icon] Version 1.0.2
+
+#### Additions
+
+* Allow server owners to toggle crafting on and off.
+
+#### Changes
+
+* Clean up our internal version of the config so that it's cleaner and closer to what's expected.
+
 ## ![Icon][icon] Version 1.0.1
 
 #### Changes
