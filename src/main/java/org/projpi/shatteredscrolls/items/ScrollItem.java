@@ -44,7 +44,9 @@ public class ScrollItem {
             return;
         }
         // Consume a charge.
-        charges--;
+        if(charges != -1024) {
+            charges--;
+        }
         // Update the item.
         if (bindingType == ScrollItemNBT.BindingType.POSITION) {
             newLoc = ScrollItemNBT.getLocationFromScroll(stack);
