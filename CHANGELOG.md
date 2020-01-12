@@ -1,4 +1,14 @@
 [icon]: https://raw.githubusercontent.com/ShatteredSuite/ShatteredScrolls/master/icon.png
+## ![Icon][icon] Version 1.0.3
+
+#### Additions
+
+* Allows creating infinite scrolls.
+
+#### Changes
+
+* Add some additional error detection when attempting to get scrolls from commands.
+
 ## ![Icon][icon] Version 1.0.2
 
 #### Additions
