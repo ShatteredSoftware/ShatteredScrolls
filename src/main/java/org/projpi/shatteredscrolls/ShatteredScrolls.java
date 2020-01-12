@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.ConfigurationSection;
@@ -95,6 +96,8 @@ public class ShatteredScrolls extends JavaPlugin implements Messageable {
         getServer()
             .getScheduler()
             .runTaskTimerAsynchronously(this, this::save, 20 * 60 * 10, 20 * 60 * 10);
+
+        Metrics metrics = new Metrics(this);
     }
 
     private void save() {
