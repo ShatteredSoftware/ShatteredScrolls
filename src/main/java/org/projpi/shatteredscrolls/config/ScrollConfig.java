@@ -60,86 +60,46 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
     }
 
     public static ScrollConfig deserialize(Map<String, Object> map) {
-        String unboundName = "§bUnbound Teleportation Scroll";
-        if (map.containsKey("scroll-unbound-name")
-            && map.get("scroll-unbound-name") instanceof String
-            && !((String) map.get("scroll-unbound-name")).isEmpty()) {
-            unboundName =
-                ChatColor
-                    .translateAlternateColorCodes('&', (String) map.get("scroll-unbound-name"));
-        }
+        String unboundName = "&bUnbound Teleportation Scroll";
+        unboundName = ChatColor.translateAlternateColorCodes('&',
+            getIfValid(map, "scroll-unbound-name", String.class, unboundName));
 
-        String unboundLore = "§7An unbound teleportation scroll." + "\n§7Right click to bind.";
-        if (map.containsKey("scroll-unbound-lore")
-            && map.get("scroll-unbound-lore") instanceof String
-            && !((String) map.get("scroll-unbound-lore")).isEmpty()) {
-            unboundLore =
-                ChatColor
-                    .translateAlternateColorCodes('&', (String) map.get("scroll-unbound-lore"));
-        }
+        String unboundLore = "    &8---=[ &7Description &8]=---\n"
+            + "    &7An unbound teleportation scroll.\n"
+            + "    &7Right click it to bind it to your location.\n"
+            + "    &7It has &f%charges%&7 charges.";
+        unboundLore = ChatColor.translateAlternateColorCodes('&',
+            getIfValid(map, "scroll-unbound-lore", String.class, unboundLore));
 
-        String boundName = "§bTeleportation Scroll";
-        if (map.containsKey("scroll-bound-name")
-            && map.get("scroll-bound-name") instanceof String
-            && !((String) map.get("scroll-bound-name")).isEmpty()) {
-            boundName =
-                ChatColor.translateAlternateColorCodes('&', (String) map.get("scroll-bound-name"));
-        }
+        String boundName = "&bTeleportation Scroll";
+        boundName = ChatColor.translateAlternateColorCodes('&',
+            getIfValid(map, "scroll-bound-name", String.class, boundName));
 
-        String boundPositionLore =
-            "§7A bound teleportation scroll."
-                + "\n§7It goes to §f%x% %y% %z%§7 in §f%world%§7."
-                + "\n"
-                + "\n§It has §f%charges%§7 left.";
-        if (map.containsKey("scroll-bound-position-lore")
-            && map.get("scroll-bound-position-lore") instanceof String
-            && !((String) map.get("scroll-bound-position-lore")).isEmpty()) {
-            boundPositionLore =
-                ChatColor.translateAlternateColorCodes(
-                    '&', (String) map.get("scroll-bound-position-lore"));
-        }
+        String boundPositionLore = "&8---=[ &7Description &8]=---\n"
+                + "&7A bound teleportation scroll.\n"
+                + "&7It goes to &f%x% %y% %z%&7 in &f%world%&7.\n"
+                + "&7It has &f%charges%&7 charges remaining.";
+        boundPositionLore = ChatColor.translateAlternateColorCodes('&',
+            getIfValid(map, "scroll-bound-position-lore", String.class, boundPositionLore));
 
-        String boundLocationLore =
-            "§7A bound teleportation scroll."
-                + "\n§7It goes to §f%location%§7."
-                + "\n"
-                + "\n§It has §f%charges%§7 left.";
-        if (map.containsKey("scroll-bound-location-lore")
-            && map.get("scroll-bound-location-lore") instanceof String
-            && !((String) map.get("scroll-bound-location-lore")).isEmpty()) {
-            boundLocationLore =
-                ChatColor.translateAlternateColorCodes(
-                    '&', (String) map.get("scroll-bound-location-lore"));
-        }
 
-        boolean unboundGlow = false;
-        if (map.containsKey("scroll-unbound-glow")
-            && map.get("scroll-unbound-glow") instanceof Boolean) {
-            unboundGlow = (boolean) map.get("scroll-unbound-glow");
-        }
+        String boundLocationLore ="&8---=[ &7Description &8]=---\n"
+                + "&7A bound teleportation scroll.\n"
+                + "&7It goes to &f%destination%&7.\n"
+                + "&7It has &f%charges%&7 charges remaining.";
+        boundLocationLore = ChatColor.translateAlternateColorCodes('&',
+            getIfValid(map, "scroll-bound-location-lore", String.class, boundLocationLore));
 
-        boolean boundGlow = true;
-        if (map.containsKey("scroll-bound-glow") && map
-            .get("scroll-bound-glow") instanceof Boolean) {
-            boundGlow = (boolean) map.get("scroll-bound-glow");
-        }
+        boolean unboundGlow = getIfValid(map, "scroll-unbound-glow", Boolean.class, false);
 
-        boolean refundInvalid = false;
-        if (map.containsKey("refund-invalid")
-            && map.get("refund-invalid") instanceof Boolean) {
-            refundInvalid = (boolean) map.get("refund-invalid");
-        }
+        boolean boundGlow = getIfValid(map, "scroll-bound-glow", Boolean.class, true);
+
+        boolean refundInvalid = getIfValid(map, "refund-invalid", Boolean.class, true);
 
         boolean allowCrafting = getIfValid(map, "allow-crafting", Boolean.class, true);
 
-        Material material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial("PAPER");
-        if (map.containsKey("scroll-material") && map.get("scroll-material") instanceof String) {
-            material = ShatteredScrolls.getInstance().getMaterialUtil()
-                .matchMaterial("scroll-material");
-            if (material == null) {
-                material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial("PAPER");
-            }
-        }
+        Material material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial(
+            getIfValid(map, "scroll-material", String.class, "PAPER"));
 
         int cooldown = getIfValid(map, "cooldown", Integer.class, 5000);
 
