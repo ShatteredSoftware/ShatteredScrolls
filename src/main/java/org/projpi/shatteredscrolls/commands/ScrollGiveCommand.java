@@ -61,12 +61,12 @@ public class ScrollGiveCommand extends WrappedCommand {
         }
 
         // Item charge handling.
-        Integer charges = parent.parent.getCharges(args, 1, sender);
+        Integer charges = parent.parent.getCharges(args, 2, sender);
         if (charges == null) {
             return true;
         }
         // Item count handling
-        Integer count = parent.parent.getCount(args, 2, sender);
+        Integer count = parent.parent.getCount(args, 3, sender);
         if (count == null) {
             return true;
         }
@@ -76,7 +76,7 @@ public class ScrollGiveCommand extends WrappedCommand {
             return true;
         } else if (args[1].equalsIgnoreCase("location")) {
             // Item count handling
-            String location = parent.parent.getLocation(args, 3, sender);
+            String location = parent.parent.getLocation(args, 4, sender);
             if (location == null) {
                 return true;
             }

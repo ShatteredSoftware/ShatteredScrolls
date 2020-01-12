@@ -69,10 +69,10 @@ public class BaseCommand extends WrappedCommand {
         int count = 1;
         if (args.length >= index + 1) {
             try {
-                count = Integer.parseInt(args[2]);
+                count = Integer.parseInt(args[index]);
             } catch (NumberFormatException ex) {
                 HashMap<String, String> msgArgs = new HashMap<>();
-                msgArgs.put("input", args[2]);
+                msgArgs.put("input", args[index]);
                 instance.getMessenger().sendErrorMessage(sender, "invalid-number-format", msgArgs);
                 return null;
             }
