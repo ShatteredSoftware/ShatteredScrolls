@@ -1,7 +1,6 @@
 package org.projpi.shatteredscrolls.commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +14,6 @@ import org.projpi.shatteredscrolls.items.ScrollItemBuilder;
 import org.projpi.util.commands.WrappedCommand;
 
 public class ScrollGetCommand extends WrappedCommand {
-
-    private static final List<String> options = Arrays.asList("unbound", "location", "position");
-    private static final List<String> chargeOptions = Arrays.asList("1", "3", "5");
-    private static final List<String> countOptions = Arrays.asList("1", "64");
     private final ShatteredScrolls instance;
     private final ScrollCommand parent;
 
@@ -101,7 +96,6 @@ public class ScrollGetCommand extends WrappedCommand {
         if (!hasPerms(sender)) {
             return Collections.emptyList();
         }
-        List<String> completions = new ArrayList<>();
         return parent.tabCompleteItem(args, 0, sender);
     }
 }
