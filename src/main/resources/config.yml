@@ -21,6 +21,7 @@ config:
   scroll-bound-glow: true
   scroll-material: PAPER
   refund-invalid: true
+  allow-crafting: true
   cooldown: 5000 # Cooldown between usages. Minimum 10.
   model: 0 # Sets custom model data if the server supports it.
   charges: 5 # The default number of charges.

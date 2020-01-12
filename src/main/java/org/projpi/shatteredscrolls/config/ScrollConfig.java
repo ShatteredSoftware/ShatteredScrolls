@@ -13,7 +13,6 @@ import org.projpi.shatteredscrolls.ShatteredScrolls;
 @SerializableAs("ScrollConfig")
 public class ScrollConfig implements Cloneable, ConfigurationSerializable {
 
-    private boolean refundInvalid;
     private String unboundName;
     private String unboundLore;
     private String boundName;
@@ -21,6 +20,8 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
     private String boundPositionLore;
     private boolean unboundGlow;
     private boolean boundGlow;
+    private boolean refundInvalid;
+    private final boolean allowCrafting;
     private int customModelData;
     private Material material;
     private int cooldown;
@@ -36,6 +37,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         boolean unboundGlow,
         boolean boundGlow,
         boolean refundInvalid,
+        boolean allowCrafting,
         int customModelData,
         Material material,
         int cooldown,
@@ -49,6 +51,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         this.unboundGlow = unboundGlow;
         this.boundGlow = boundGlow;
         this.refundInvalid = refundInvalid;
+        this.allowCrafting = allowCrafting;
         this.customModelData = customModelData;
         this.material = material;
         this.cooldown = cooldown;
@@ -115,17 +118,19 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
             unboundGlow = (boolean) map.get("scroll-unbound-glow");
         }
 
+        boolean boundGlow = true;
+        if (map.containsKey("scroll-bound-glow") && map
+            .get("scroll-bound-glow") instanceof Boolean) {
+            boundGlow = (boolean) map.get("scroll-bound-glow");
+        }
+
         boolean refundInvalid = false;
         if (map.containsKey("refund-invalid")
             && map.get("refund-invalid") instanceof Boolean) {
             refundInvalid = (boolean) map.get("refund-invalid");
         }
 
-        boolean boundGlow = true;
-        if (map.containsKey("scroll-bound-glow") && map
-            .get("scroll-bound-glow") instanceof Boolean) {
-            boundGlow = (boolean) map.get("scroll-bound-glow");
-        }
+        boolean allowCrafting = getIfValid(map, "allow-crafting", Boolean.class, true);
 
         Material material = ShatteredScrolls.getInstance().getMaterialUtil().matchMaterial("PAPER");
         if (map.containsKey("scroll-material") && map.get("scroll-material") instanceof String) {
@@ -160,6 +165,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
             unboundGlow,
             boundGlow,
             refundInvalid,
+            allowCrafting,
             customModelData,
             material,
             cooldown,
