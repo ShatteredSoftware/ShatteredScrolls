@@ -1,7 +1,7 @@
 package org.projpi.shatteredscrolls.items;
 
 import java.util.Arrays;
-import org.apache.commons.lang.WordUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -36,9 +36,12 @@ public class ScrollItemBuilder {
 
         ItemMeta meta = stack.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(config.getUnboundName());
+            String chargeAmount = charges != -1024 ? String.valueOf(charges) : "\u221E"; //∞
+            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config
+                .getUnboundName()
+                .replaceAll("%charges%", chargeAmount)));
             String lore = config.getUnboundLore()
-                .replaceAll("%charges%", charges != -1024 ? String.valueOf(charges) : "\u221E"); //∞
+                .replaceAll("%charges%", chargeAmount); //∞
             meta.setLore(Arrays.asList(lore.split("\n")));
             stack.setItemMeta(meta);
             if(config.doesUnboundGlow()) {
@@ -73,8 +76,14 @@ public class ScrollItemBuilder {
 
         if (stack.hasItemMeta()) {
             ItemMeta meta = stack.getItemMeta();
-            //noinspection ConstantConditions
-            meta.setDisplayName(config.getBoundName());
+            String chargeAmount = charges != -1024 ? String.valueOf(charges) : "\u221E"; //∞
+            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config
+                .getBoundName()
+                .replaceAll("\r", "")
+                .replaceAll("%x%", String.valueOf(destination.getBlockX()))
+                .replaceAll("%y%", String.valueOf(destination.getBlockY()))
+                .replaceAll("%z%", String.valueOf(destination.getBlockZ()))
+                .replaceAll("%charges%", chargeAmount)));
             String lore =
                 config
                     .getBoundPositionLore()
@@ -82,7 +91,7 @@ public class ScrollItemBuilder {
                     .replaceAll("%x%", String.valueOf(destination.getBlockX()))
                     .replaceAll("%y%", String.valueOf(destination.getBlockY()))
                     .replaceAll("%z%", String.valueOf(destination.getBlockZ()))
-                    .replaceAll("%charges%", charges != -1024 ? String.valueOf(charges) : "\u221E"); //∞
+                    .replaceAll("%charges%", chargeAmount);
             if (destination.getWorld() != null) {
                 lore = lore.replaceAll("%world%", destination.getWorld().getName());
             }
@@ -120,13 +129,16 @@ public class ScrollItemBuilder {
 
         if (stack.hasItemMeta()) {
             ItemMeta meta = stack.getItemMeta();
-            //noinspection ConstantConditions
-            meta.setDisplayName(config.getBoundName());
+            String chargeAmount = charges != -1024 ? String.valueOf(charges) : "\u221E"; //∞
+            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config
+                .getBoundName()
+                .replaceAll("%destination%", instance.getLocation(destination).getName())
+                .replaceAll("%charges%", chargeAmount)));
             String lore =
                 config
                     .getBoundLocationLore()
                     .replaceAll("%destination%", instance.getLocation(destination).getName())
-                    .replaceAll("%charges%", charges != -1024 ? String.valueOf(charges) : "\u221E"); //∞
+                    .replaceAll("%charges%", chargeAmount);
             meta.setLore(Arrays.asList(lore.split("\n")));
             if(config.doesBoundGlow()) {
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

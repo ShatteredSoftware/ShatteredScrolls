@@ -1,4 +1,10 @@
 [icon]: https://raw.githubusercontent.com/ShatteredSuite/ShatteredScrolls/master/icon.png
+## ![Icon][icon] Version 1.0.4
+
+#### Additions
+
+* Allows using placeholders in item names.
+
 ## ![Icon][icon] Version 1.0.3
 
 #### Additions
