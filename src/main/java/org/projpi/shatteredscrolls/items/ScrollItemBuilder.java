@@ -59,11 +59,11 @@ public class ScrollItemBuilder {
         return stack;
     }
 
-    public static ItemStack getBoundScroll(int count, Location destination) {
-        return getBoundScroll(count, config.getCharges(), destination);
+    public static ItemStack getBoundScrollPosition(int count, Location destination) {
+        return getBoundScrollPosition(count, config.getCharges(), destination);
     }
 
-    public static ItemStack getBoundScroll(int count, int charges, Location destination) {
+    public static ItemStack getBoundScrollPosition(int count, int charges, Location destination) {
         if (charges <= 0 && charges != -1024) {
             return new ItemStack(Material.AIR);
         }
@@ -78,7 +78,7 @@ public class ScrollItemBuilder {
             ItemMeta meta = stack.getItemMeta();
             String chargeAmount = charges != -1024 ? String.valueOf(charges) : "\u221E"; //∞
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config
-                .getBoundName()
+                .getBoundPositionName()
                 .replaceAll("\r", "")
                 .replaceAll("%x%", String.valueOf(destination.getBlockX()))
                 .replaceAll("%y%", String.valueOf(destination.getBlockY()))
@@ -112,11 +112,11 @@ public class ScrollItemBuilder {
         return stack;
     }
 
-    public static ItemStack getBoundScroll(int count, String destination) {
-        return getBoundScroll(count, config.getCharges(), destination);
+    public static ItemStack getBoundScrollLocation(int count, String destination) {
+        return getBoundScrollLocation(count, config.getCharges(), destination);
     }
 
-    public static ItemStack getBoundScroll(int count, int charges, String destination) {
+    public static ItemStack getBoundScrollLocation(int count, int charges, String destination) {
         if (charges <= 0 && charges != -1024) {
             return new ItemStack(Material.AIR);
         }
@@ -131,7 +131,7 @@ public class ScrollItemBuilder {
             ItemMeta meta = stack.getItemMeta();
             String chargeAmount = charges != -1024 ? String.valueOf(charges) : "\u221E"; //∞
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config
-                .getBoundName()
+                .getBoundLocationName()
                 .replaceAll("%destination%", instance.getLocation(destination).getName())
                 .replaceAll("%charges%", chargeAmount)));
             String lore =

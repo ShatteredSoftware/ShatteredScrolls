@@ -16,6 +16,8 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
     private String unboundName;
     private String unboundLore;
     private String boundName;
+    private String boundLocationName;
+    private String boundPositionName;
     private String boundLocationLore;
     private String boundPositionLore;
     private boolean unboundGlow;
@@ -32,7 +34,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         String unboundName,
         String unboundLore,
         String boundName,
-        String boundLocationLore,
+        String boundLocationName, String boundPositionName, String boundLocationLore,
         String boundPositionLore,
         boolean unboundGlow,
         boolean boundGlow,
@@ -46,6 +48,8 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         this.unboundName = unboundName;
         this.unboundLore = unboundLore;
         this.boundName = boundName;
+        this.boundLocationName = boundLocationName;
+        this.boundPositionName = boundPositionName;
         this.boundLocationLore = boundLocationLore;
         this.boundPositionLore = boundPositionLore;
         this.unboundGlow = unboundGlow;
@@ -74,6 +78,14 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         String boundName = "&bTeleportation Scroll";
         boundName = ChatColor.translateAlternateColorCodes('&',
             getIfValid(map, "scroll-bound-name", String.class, boundName));
+
+        String boundLocationName = "&bTeleportation Scroll";
+        boundLocationName = ChatColor.translateAlternateColorCodes('&',
+            getIfValid(map, "scroll-bound-location-name", String.class, boundLocationName));
+
+        String boundPositionName = "&bTeleportation Scroll";
+        boundPositionName = ChatColor.translateAlternateColorCodes('&',
+            getIfValid(map, "scroll-bound-position-name", String.class, boundPositionName));
 
         String boundPositionLore = "&8---=[ &7Description &8]=---\n"
                 + "&7A bound teleportation scroll.\n"
@@ -120,7 +132,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
             unboundName,
             unboundLore,
             boundName,
-            boundLocationLore,
+            boundLocationName, boundPositionName, boundLocationLore,
             boundPositionLore,
             unboundGlow,
             boundGlow,
@@ -193,6 +205,14 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
 
     public boolean doesUnboundGlow() {
         return unboundGlow;
+    }
+
+    public String getBoundLocationName() {
+        return boundLocationName;
+    }
+
+    public String getBoundPositionName() {
+        return boundPositionName;
     }
 
     public boolean doesBoundGlow() {

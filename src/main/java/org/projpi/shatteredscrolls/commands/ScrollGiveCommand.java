@@ -10,7 +10,6 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.StringUtil;
 import org.projpi.shatteredscrolls.ShatteredScrolls;
 import org.projpi.shatteredscrolls.items.ScrollItemBuilder;
@@ -81,7 +80,7 @@ public class ScrollGiveCommand extends WrappedCommand {
                 return true;
             }
             p.getInventory()
-                .addItem(ScrollItemBuilder.getBoundScroll(count, charges, location));
+                .addItem(ScrollItemBuilder.getBoundScrollLocation(count, charges, location));
             return true;
         } else if (args[1].equalsIgnoreCase("position")) {
             Location location = parent.parent.getPosition(args, 4, sender);
@@ -89,7 +88,7 @@ public class ScrollGiveCommand extends WrappedCommand {
                 return false;
             }
             p.getInventory()
-                .addItem(ScrollItemBuilder.getBoundScroll(count, charges, location));
+                .addItem(ScrollItemBuilder.getBoundScrollPosition(count, charges, location));
             return true;
         }
         return true;

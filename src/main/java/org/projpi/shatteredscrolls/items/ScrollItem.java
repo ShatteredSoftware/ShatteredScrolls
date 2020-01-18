@@ -39,7 +39,7 @@ public class ScrollItem {
         Location oldLoc = player.getLocation();
         Location newLoc;
         if (bindingType == ScrollItemNBT.BindingType.UNBOUND) {
-            getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges, player.getLocation()),
+            getNextItem(() -> ScrollItemBuilder.getBoundScrollPosition(1, charges, player.getLocation()),
                 player);
             return;
         }
@@ -50,7 +50,7 @@ public class ScrollItem {
         // Update the item.
         if (bindingType == ScrollItemNBT.BindingType.POSITION) {
             newLoc = ScrollItemNBT.getLocationFromScroll(stack);
-            getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges, newLoc), player);
+            getNextItem(() -> ScrollItemBuilder.getBoundScrollPosition(1, charges, newLoc), player);
         } else {
             ScrollLocation dest = ShatteredScrolls.getInstance().getLocation(destination);
             if(dest == null) {
@@ -60,12 +60,12 @@ public class ScrollItem {
                 }
                 else {
                     ShatteredScrolls.getInstance().getMessenger().sendImportantMessage(player, "bound-invalid-location");
-                    getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges + 1, destination), player);
+                    getNextItem(() -> ScrollItemBuilder.getBoundScrollLocation(1, charges + 1, destination), player);
                 }
                 return;
             }
             newLoc = dest.getLocation();
-            getNextItem(() -> ScrollItemBuilder.getBoundScroll(1, charges, destination), player);
+            getNextItem(() -> ScrollItemBuilder.getBoundScrollLocation(1, charges, destination), player);
         }
 
         // Do teleportation

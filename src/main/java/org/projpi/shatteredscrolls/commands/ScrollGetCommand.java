@@ -1,6 +1,5 @@
 package org.projpi.shatteredscrolls.commands;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -75,7 +74,7 @@ public class ScrollGetCommand extends WrappedCommand {
             }
             ((InventoryHolder) sender)
                 .getInventory()
-                .addItem(ScrollItemBuilder.getBoundScroll(count, charges, location));
+                .addItem(ScrollItemBuilder.getBoundScrollLocation(count, charges, location));
             return true;
         } else if (args[0].equalsIgnoreCase("position")) {
             Location location = parent.parent.getPosition(args, 4, sender);
@@ -84,7 +83,7 @@ public class ScrollGetCommand extends WrappedCommand {
             }
             ((Player) sender)
                 .getInventory()
-                .addItem(ScrollItemBuilder.getBoundScroll(count, charges, location));
+                .addItem(ScrollItemBuilder.getBoundScrollPosition(count, charges, location));
             return true;
         }
         return true;

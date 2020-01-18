@@ -1,9 +1,13 @@
 [icon]: https://raw.githubusercontent.com/ShatteredSuite/ShatteredScrolls/master/icon.png
-## ![Icon][icon] Version 1.0.4
+## ![Icon][icon] Version 1.1.0
 
 #### Additions
 
 * Allows using placeholders in item names.
+
+#### Changes
+
+* Moves the config option `scroll-bound-name` to `scroll-location-bound-name` and `scroll-bound-position-name`
 
 ## ![Icon][icon] Version 1.0.3
 
