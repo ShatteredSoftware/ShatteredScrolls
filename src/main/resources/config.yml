@@ -25,7 +25,7 @@ config:
   allow-crafting: true
   cooldown: 5000 # Cooldown between usages. Minimum 10.
   model: 0 # Sets custom model data if the server supports it.
-  charges: 5 # The default number of charges.
+  charges: 5 # The default number of charges. Set to -1024 for infinity.
   cost:
     ==: ScrollCost # DO NOT DELETE THIS LINE!
     type: POTION # Options: XP, HUNGER, HEALTH. Defaults to XP if invalid.
