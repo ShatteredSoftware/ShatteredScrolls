@@ -1,5 +1,7 @@
 package org.projpi.shatteredscrolls.config;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.bukkit.ChatColor;
@@ -9,6 +11,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.projpi.shatteredscrolls.ShatteredScrolls;
+import org.projpi.shatteredscrolls.config.ScrollCost.CostType;
 
 @SerializableAs("ScrollConfig")
 public class ScrollConfig implements Cloneable, ConfigurationSerializable {
@@ -29,6 +32,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
     private int cooldown;
     private int charges;
     private ScrollCost cost;
+    private ScrollRecipe recipe;
 
     public ScrollConfig(
         String unboundName,
@@ -44,7 +48,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         Material material,
         int cooldown,
         int charges,
-        ScrollCost cost) {
+        ScrollCost cost, ScrollRecipe recipe) {
         this.unboundName = unboundName;
         this.unboundLore = unboundLore;
         this.boundName = boundName;
@@ -61,6 +65,7 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
         this.cooldown = cooldown;
         this.charges = charges;
         this.cost = cost;
+        this.recipe = recipe;
     }
 
     public static ScrollConfig deserialize(Map<String, Object> map) {
@@ -125,8 +130,17 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
                 "cost",
                 ScrollCost.class,
                 new ScrollCost(
-                    ScrollCost.CostType.POTION,
+                    CostType.POTION,
                     new PotionEffect(PotionEffectType.BLINDNESS, 5, 0)));
+
+        HashMap<String, String> defaultMapping = new HashMap<>();
+        defaultMapping.put("E", "ENDER_PEARL");
+        defaultMapping.put("P", "PAPER");
+
+        ScrollRecipe recipe =
+            getIfValid(map, "recipe", ScrollRecipe.class,
+                new ScrollRecipe(
+                    Arrays.asList(" E ", "EPE", " E "), defaultMapping, 1));
 
         return new ScrollConfig(
             unboundName,
@@ -142,16 +156,24 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
             material,
             cooldown,
             charges,
-            cost);
+            cost,
+            recipe);
     }
 
-    private static <T> T getIfValid(Map<String, Object> map, String key, Class<T> clazz, T def) {
+    public static <T> T getIfValid(Map<String, Object> map, String key, Class<T> clazz, T def) {
         if (!map.containsKey(key)) {
             return def;
         }
         Object obj = map.get(key);
-        if (obj == null || !obj.getClass().equals(clazz)) {
+        if (obj == null) {
+            ShatteredScrolls.getInstance().getLogger().warning("Could not find " + key
+                + " in config. Using default.");
             return def;
+        }
+        if(!obj.getClass().isAssignableFrom(clazz)) {
+            ShatteredScrolls.getInstance().getLogger().severe("Found " + key +
+                " in config with wrong type " + obj.getClass().getName() + " (expected " +
+                clazz.getName() + "). Report this to the author. Using default.");
         }
         return clazz.cast(map.get(key));
     }
@@ -229,5 +251,9 @@ public class ScrollConfig implements Cloneable, ConfigurationSerializable {
 
     public boolean doesAllowCrafting() {
         return allowCrafting;
+    }
+
+    public ScrollRecipe getRecipe() {
+        return recipe;
     }
 }
