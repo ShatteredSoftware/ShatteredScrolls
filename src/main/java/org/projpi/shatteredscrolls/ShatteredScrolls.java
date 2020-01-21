@@ -16,6 +16,7 @@ import org.projpi.shatteredscrolls.commands.BaseCommand;
 import org.projpi.shatteredscrolls.config.ScrollConfig;
 import org.projpi.shatteredscrolls.config.ScrollCost;
 import org.projpi.shatteredscrolls.config.ScrollLocation;
+import org.projpi.shatteredscrolls.config.ScrollRecipe;
 import org.projpi.shatteredscrolls.listeners.InteractListener;
 import org.projpi.shatteredscrolls.recipes.RecipeHandler;
 import org.projpi.util.MaterialUtil;
@@ -67,6 +68,7 @@ public class ShatteredScrolls extends JavaPlugin implements Messageable {
         ConfigurationSerialization.registerClass(ScrollConfig.class);
         ConfigurationSerialization.registerClass(ScrollLocation.class);
         ConfigurationSerialization.registerClass(ScrollCost.class);
+        ConfigurationSerialization.registerClass(ScrollRecipe.class);
 
         loadVersionSpecific();
         loadMessages();
