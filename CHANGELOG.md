@@ -1,4 +1,14 @@
 [icon]: https://raw.githubusercontent.com/ShatteredSuite/ShatteredScrolls/master/icon.png
+## ![Icon][icon] Version 1.2.0
+
+#### Additions
+
+* Add an option to configure the recipe of the unbound scroll.
+
+#### Changes
+
+* Add a section to the config to handle crafting recipes.
+
 ## ![Icon][icon] Version 1.1.0
 
 #### Additions
