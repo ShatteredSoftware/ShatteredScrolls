@@ -6,9 +6,9 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'maven'
 
-group = 'com.github.ShatteredSuite'
+group = 'com.github.shatteredsuite'
 
-String packagePath = 'org.projpi.shatteredscrolls'
+String packagePath = 'com.github.shatteredsuite.scrolls'
 group = pluginGroup
 version = pluginVersion
 
@@ -33,7 +33,7 @@ repositories {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.15.1-R0.1-SNAPSHOT'
     implementation group: 'org.bstats', name: 'bstats-bukkit', version: '1.5'
-    implementation group: 'org.projpi', name: 'ShatteredUtilities', version: '1.6.2'
+    implementation group: 'com.github.shatteredsuite', name: 'ShatteredUtilities', version: '2.0.0'
 }
 
 artifacts {
@@ -50,7 +50,7 @@ shadowJar {
         include dependency('org.projpi:ShatteredUtilities')
     }
     relocate('org.bstats.bukkit', packagePath + '.dependencies')
-    relocate('org.projpi.utilities', packagePath + '.dependencies')
+    relocate('com.github.shatteredsuite.utilities', packagePath + '.dependencies')
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
