@@ -6,6 +6,7 @@ plugins {
 apply plugin: 'base'
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 group = 'com.github.shatteredsuite'
 
@@ -46,6 +47,7 @@ jar {
 }
 
 shadowJar {
+    classifier = null
     dependencies {
         include dependency('org.bstats:bstats-bukkit')
         include dependency('org.projpi:ShatteredUtilities')
@@ -55,6 +57,16 @@ shadowJar {
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = "ShatteredScrolls"
+            groupId = 'com.github.shatteredsuite'
+            artifact shadowJar
+        }
+    }
+}
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
